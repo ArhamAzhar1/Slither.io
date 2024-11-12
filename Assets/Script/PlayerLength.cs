@@ -5,7 +5,7 @@ using Unity.Netcode;
 public class PlayerLength : NetworkBehaviour
 {
     [SerializeField]
-    private GameObject bodyBallPrefab;
+    private GameObject tailPrefab;
     public NetworkVariable<ushort> length = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     private List<GameObject> _tails;
@@ -18,6 +18,7 @@ public class PlayerLength : NetworkBehaviour
 
         private void InsantiateTail()
         {
-            GameObject tail = Instantiate();
+            GameObject tail = Instantiate(tailPrefab, transform.position, Quaternion.identity);
+            _tails.Add(tail);
         }
 }
